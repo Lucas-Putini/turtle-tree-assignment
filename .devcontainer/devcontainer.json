@@ -24,12 +24,12 @@
        "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached",
        "source=/dev/dri,target=/dev/dri,type=bind,consistency=cached"
     ],
-    "postCreateCommand": "sudo chown -R ros2:ros2 /home/ros2/ws && ln -s /home/ros2/ws/build/behaviortree_ros2/bt_executor_parameters/include/bt_executor_parameters.hpp /home/ros2/ws/src/btcpp/behaviortree_ros2/include/behaviortree_ros2",
+    "postCreateCommand": "sudo chown -R ros2:ros2 /home/ros2/ws",
     "customizations": {
         "vscode": {
             "extensions":[
                 "ms-vscode.cpptools",
-                "ms-vscode.cpptools-themes",
+                "ms-vscode.cpptools-extension-pack",
                 "ms-vscode.cmake-tools",
                 "spencerwmiles.vscode-task-buttons"
             ]

@@ -4,26 +4,23 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "colcon: build (debug)",
+            "label": "run turtlesim",
             "type": "shell",
-            "command": [
-                "source /opt/ros/$ROS_DISTRO/setup.bash;",
-                "cd /home/ros2/ws;",
-                "colcon build",
-                "--symlink-install",
-                "--event-handlers console_cohesion+",
-                "--cmake-args -DCMAKE_BUILD_TYPE=Debug"
-            ]
+            "command": "ros2 run turtlesim turtlesim_node"
         },
         {
-            "label": "colcon: test",
+            "label": "run behavior tree",
+            "type": "shell",
+            "command": "source /home/ros2/ws/install/setup.bash && ros2 run turtle_tree_tutorial behavior_tree"
+        },
+        {
+            "label": "colcon build",
             "type": "shell",
             "command": [
-                "source /opt/ros/$ROS_DISTRO/setup.bash;",
                 "cd /home/ros2/ws;",
-                "source install/setup.bash;",
-                "colcon test",
-                "--event-handlers console_cohesion+"
+                "colcon build",
+                "--event-handlers console_cohesion+",
+                "--cmake-args -DCMAKE_BUILD_TYPE=Debug"
             ]
         }
     ]

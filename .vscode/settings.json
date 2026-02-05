@@ -1,0 +1,23 @@
+{
+    "cmake.sourceDirectory": "/home/ros2/.devcontainer/src/turtle_tree_tutorial",
+    "VsCodeTaskButtons.tasks": [
+        {
+            "task": "colcon build",
+            "label": "Build ROS 2 workspace",
+            "tooltip": "Rebuild the project in the ROS 2 workspace",
+            "color": "warning"
+        },
+        {
+            "task": "run turtlesim",
+            "label": "Run turtlesim",
+            "tooltip": "Launch the turtlesim node",
+            "color": "warning"
+        },
+        {
+            "task": "run behavior tree",
+            "label": "Run behavior tree",
+            "tooltip": "Run the behavior tree",
+            "color": "warning"
+        }
+    ]
+}
