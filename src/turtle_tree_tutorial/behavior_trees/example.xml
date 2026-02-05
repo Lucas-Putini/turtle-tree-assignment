@@ -1,0 +1,12 @@
+<root BTCPP_format="4">
+  <BehaviorTree ID="Main">
+    <Sequence>
+      <HelloWorld/>
+      <Talker message="my message"/>
+      <SpawnTurtle x="7" y="4" theta="1.5"/>
+      <MoveTurtleRelative linear="1" angular="0.5"/>
+      <MoveTurtleRelative linear="1" angular="-0.5"/>
+      <MoveTurtleRelative linear="1" angular="0.5"/>
+    </Sequence>
+  </BehaviorTree>
+</root>
