@@ -7,9 +7,9 @@
     },
     "containerEnv": {
         // display setting on Linux (default)
-        // "DISPLAY": "${env:DISPLAY}",
+        "DISPLAY": "${env:DISPLAY}",
         // display setting with X11 forwarding
-        "DISPLAY": "host.docker.internal:0",
+        // "DISPLAY": "host.docker.internal:0",
         "ROS_AUTOMATIC_DISCOVERY_RANGE": "LOCALHOST",
         "ROS_DOMAIN_ID": "42"
     },
