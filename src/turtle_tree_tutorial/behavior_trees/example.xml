@@ -2,11 +2,34 @@
   <BehaviorTree ID="Main">
     <Sequence>
       <HelloWorld/>
-      <Talker message="my message"/>
-      <SpawnTurtle x="7" y="4" theta="1.5"/>
-      <MoveTurtleRelative linear="1" angular="0.5"/>
-      <MoveTurtleRelative linear="1" angular="-0.5"/>
-      <MoveTurtleRelative linear="1" angular="0.5"/>
+      <PatchedDelay delay_msec="500">
+        <Talker message="3"/>
+      </PatchedDelay>
+      <PatchedDelay delay_msec="500">
+        <Talker message="2"/>
+      </PatchedDelay>
+      <PatchedDelay delay_msec="500">
+        <Talker message="1"/>
+      </PatchedDelay>
+
+      <ResetTurtle/>
+
+      <!-- Use delays between commands to give them time to swim -->
+      <CommandTurtleSwim speed="1"/>
+      <PatchedDelay delay_msec="500">
+        <CommandTurtleSwim speed="0.5" turn="5"/>
+      </PatchedDelay>
+
+      <SpawnTurtle x="7" y="4" theta="1.5" new_name="{new_turtle_name}"/>
+      <Script code="greeting := 'Hello ' + new_turtle_name"/>
+      <Talker message="{greeting}"/>
+      <Script code="new_command_topic := '/' + new_turtle_name + '/cmd_vel'"/>
+      <CommandTurtleSwim speed="1" turn="-0.5" topic_name="{new_command_topic}"/>
+
+      <PatchedDelay delay_msec="500">
+        <CommandTurtleSwim speed="3"/>
+      </PatchedDelay>
+      
     </Sequence>
   </BehaviorTree>
 </root>

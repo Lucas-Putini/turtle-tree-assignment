@@ -19,7 +19,7 @@ endif()
 find_package(ament_cmake_auto REQUIRED)
 ament_auto_find_build_dependencies()
 
-ament_auto_add_executable(behavior_tree src/behavior_tree.cpp src/TalkerActionNode.cpp)
+ament_auto_add_executable(behavior_tree src/behavior_tree.cpp src/delay_node.cpp src/TalkerActionNode.cpp)
 target_compile_definitions(behavior_tree PRIVATE BEHAVIOR_TREE_DIR="${PROJECT_SOURCE_DIR}/behavior_trees/")
 
 install(TARGETS behavior_tree DESTINATION lib/${PROJECT_NAME})
