@@ -3,6 +3,9 @@
 .postCreateCommandMarker
 .updateContentCommandMarker
 
+# build output
+build/
+
 # Prerequisites
 *.d
 
