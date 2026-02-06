@@ -28,7 +28,7 @@ Any custom tree nodes must be registered in the behavior_tree.cpp implementation
 
 ## Devcontainer configuration
 
-Install VSCode and Docker on a Linux or Mac PC.
+Install [VSCode](https://code.visualstudio.com/download) and [Docker](https://www.docker.com/get-started) on a Linux or Mac PC.
 
 The default configuration of this repository is for a Linux host machine.
 Open this repository in VSCode with the devcontainers extension ("Reopen in Container" command).
@@ -40,7 +40,7 @@ On Mac, the window for displaying the turtlesim won't work without additional di
 
 Follow the steps in [this guide](https://gist.github.com/sorny/969fe55d85c9b0035b0109a31cbcb088), then make the following local changes to the devcontainer configuration in [.devcontainer/devcontainer.json](./.devcontainer/devcontainer.json):
 
-Under `containerEnv`, comment out the default line `"DISPLAY": "${env:DISPLAY}",` and instead use `"DISPLAY": "host.docker.internal:0"`.
+- Under `containerEnv`, comment out the default line `"DISPLAY": "${env:DISPLAY}",` and instead use `"DISPLAY": "host.docker.internal:0"`. 
 
 ## Intended Usage
 
@@ -50,7 +50,8 @@ Under `containerEnv`, comment out the default line `"DISPLAY": "${env:DISPLAY}",
 
 Modify the tree XML and any node implementations and re-run the respective steps.
 
-### The behavior tree 
+### The behavior tree
+
 The [behavior_tree.cpp](./src/turtle_tree_tutorial/src/behavior_tree.cpp) executable registers nodes and instantiates a tree from an XML file.
 This file is the [example.xml](./src/turtle_tree_tutorial/behavior_trees/example.xml) tree by default. Running the executable with a command line argument
 will look for a file in the [behavior_trees](./src/turtle_tree_tutorial/behavior_trees) directory. For example,
