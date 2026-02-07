@@ -18,7 +18,7 @@
         {
             "label": "run behavior tree",
             "type": "shell",
-            "command": "source /home/ros2/ws/install/setup.bash && ros2 run turtle_tree_tutorial behavior_tree hslu.xml"
+            "command": "source /home/ros2/ws/install/setup.bash && ros2 run turtle_tree_tutorial behavior_tree hslu_setup.xml && sleep 0.3 && ros2 run turtle_tree_tutorial behavior_tree hslu_draw.xml"
         },
         {
             "label": "run behavior tree (example)",

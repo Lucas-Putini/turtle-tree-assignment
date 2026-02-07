@@ -1,0 +1,14 @@
+<root BTCPP_format="4">
+  <BehaviorTree ID="Main">
+    <Sequence>
+      <Talker message="Setting up turtles"/>
+      <ResetTurtle service_name="/reset"/>
+      <SpawnTurtle service_name="/spawn" x="5.0" y="5.0" theta="0.0"/>
+      <SpawnTurtle service_name="/spawn" x="7.0" y="5.0" theta="0.0"/>
+      <SpawnTurtle service_name="/spawn" x="9.0" y="5.0" theta="0.0"/>
+      <PatchedDelay delay_msec="250">
+        <Talker message="setup done"/>
+      </PatchedDelay>
+    </Sequence>
+  </BehaviorTree>
+</root>

@@ -124,3 +124,79 @@ for more details on the behavior and input / output ports.
 Additionally, [TalkerActionNode](./src/turtle_tree_tutorial/include/turtle_tree_tutorial/TalkerActionNode.hpp) is a minimal example of a core (ROS-agnostic) BT Node.
 
 [PatchedDelay](./src/turtle_tree_tutorial/include/turtle_tree_tutorial/delay_node.hpp) is a re-implementation of the "built-in" delay node decorator that fixes a bug (https://github.com/BehaviorTree/BehaviorTree.CPP/issues/1096)
+
+## Assignment Report (HSLU) - What was implemented and how it works
+
+This project implements a ROS 2 + Behavior Tree solution that draws **H, S, L, U** in turtlesim.
+
+### Execution architecture
+
+The execution is split into two XML trees:
+
+1. `hslu_setup.xml`
+- Calls `ResetTurtle` to clear screen and reset turtle1
+- Spawns `turtle2`, `turtle3`, `turtle4`
+- Adds a short delay so ROS services/topics are fully available
+
+2. `hslu_draw.xml`
+- Draws letters in sequence: H -> S -> L -> U
+- Uses pen control + teleport commands per turtle
+- Uses conditional checks (`Fallback`) before each letter starts
+
+This split avoids startup race conditions where a draw tree tries to use `/turtle2/...` services before turtle2 exists.
+
+### Requirement 1 - Custom node that commands or receives feedback
+
+A custom node `SetPenTurtle` is used to command turtle pen behavior.
+
+Where:
+- Implementation: `src/turtle_tree_tutorial/include/turtle_tree_tutorial/turtle_interfaces.hpp`
+- Registration in BT factory: `src/turtle_tree_tutorial/src/behavior_tree.cpp`
+- Runtime usage: `src/turtle_tree_tutorial/behavior_trees/hslu_draw.xml`
+
+How it works internally:
+- Inherits from `BT::RosServiceNode<turtlesim::srv::SetPen>`
+- Exposes BT input ports: `r`, `g`, `b`, `width`, `off`
+- In `setRequest(...)`, reads XML port values and fills ROS service request fields
+- On successful service response, returns `BT::NodeStatus::SUCCESS`
+
+Practical effect:
+- Color and width are configurable per letter/turtle
+- `off=1` disables drawing while repositioning
+- `off=0` enables visible stroke drawing
+
+### Requirement 2 - Conditional logic (SUCCESS/FAILURE)
+
+Conditional behavior is implemented with `Fallback + CheckTurtlePose` for H, S, L, U.
+
+Control pattern used per letter:
+1. `TRY-A`: Check whether turtle is already at expected start pose (`CheckTurtlePose`)
+2. If `TRY-A` returns `SUCCESS`, continue directly
+3. If `TRY-A` returns `FAILURE`, `Fallback` executes `TRY-B`:
+- move turtle to expected pose (`MoveTurtleAbsolute`)
+- validate again with `CheckTurtlePose`
+
+Why this satisfies the requirement:
+- There is explicit branching on SUCCESS vs FAILURE
+- The tree adapts behavior depending on runtime pose status
+
+### Requirement 3 - Use of Generative AI
+
+Generative AI was used during implementation in the following ways:
+
+1. XML generation/refinement
+- Generated initial drafts for `hslu_setup.xml` and `hslu_draw.xml`
+- Iteratively refined letter trajectories, especially S shape points
+
+2. Control-flow design support
+- Proposed and refined `Fallback`-based conditional pattern
+- Helped structure setup/draw split to reduce ROS startup issues
+
+3. Environment/debug support
+- Assisted troubleshooting of Mac devcontainer + XQuartz display forwarding
+- Helped stabilize task flow and runtime sequence
+
+All AI suggestions were manually reviewed, edited, and validated through execution:
+- `colcon build`
+- `run turtlesim`
+- `run behavior tree`
