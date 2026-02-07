@@ -1,0 +1,131 @@
+<root BTCPP_format="4">
+  <BehaviorTree ID="Main">
+    <Sequence>
+      <Talker message="Starting HSLU drawing"/>
+      <ResetTurtle/>
+
+      <!-- Create turtle2, turtle3 and turtle4 -->
+      <SpawnTurtle x="5.0" y="5.0" theta="0.0"/>
+      <SpawnTurtle x="7.0" y="5.0" theta="0.0"/>
+      <SpawnTurtle x="9.0" y="5.0" theta="0.0"/>
+      <PatchedDelay delay_msec="400">
+        <Talker message="Spawned all turtles"/>
+      </PatchedDelay>
+
+      <!-- H -->
+      <Talker message="Drawing H"/>
+      <SetPenTurtle service_name="/turtle1/set_pen" r="245" g="245" b="245" width="3" off="1"/>
+      <Fallback>
+        <CheckTurtlePose topic_name="/turtle1/pose" x="1.1" y="8.8" theta="0.0" linear_distance="0.05" angular_distance="0.2"/>
+        <Sequence>
+          <MoveTurtleAbsolute service_name="/turtle1/teleport_absolute" x="1.1" y="8.8" theta="0.0"/>
+          <CheckTurtlePose topic_name="/turtle1/pose" x="1.1" y="8.8" theta="0.0" linear_distance="0.05" angular_distance="0.2"/>
+        </Sequence>
+      </Fallback>
+      <SetPenTurtle service_name="/turtle1/set_pen" r="245" g="245" b="245" width="3" off="0"/>
+      <PatchedDelay delay_msec="170">
+        <MoveTurtleAbsolute service_name="/turtle1/teleport_absolute" x="1.1" y="2.4" theta="0.0"/>
+      </PatchedDelay>
+      <SetPenTurtle service_name="/turtle1/set_pen" r="245" g="245" b="245" width="3" off="1"/>
+      <PatchedDelay delay_msec="120">
+        <MoveTurtleAbsolute service_name="/turtle1/teleport_absolute" x="1.1" y="5.6" theta="0.0"/>
+      </PatchedDelay>
+      <SetPenTurtle service_name="/turtle1/set_pen" r="245" g="245" b="245" width="3" off="0"/>
+      <PatchedDelay delay_msec="170">
+        <MoveTurtleAbsolute service_name="/turtle1/teleport_absolute" x="2.3" y="5.6" theta="0.0"/>
+      </PatchedDelay>
+      <SetPenTurtle service_name="/turtle1/set_pen" r="245" g="245" b="245" width="3" off="1"/>
+      <PatchedDelay delay_msec="120">
+        <MoveTurtleAbsolute service_name="/turtle1/teleport_absolute" x="2.3" y="8.8" theta="0.0"/>
+      </PatchedDelay>
+      <SetPenTurtle service_name="/turtle1/set_pen" r="245" g="245" b="245" width="3" off="0"/>
+      <PatchedDelay delay_msec="170">
+        <MoveTurtleAbsolute service_name="/turtle1/teleport_absolute" x="2.3" y="2.4" theta="0.0"/>
+      </PatchedDelay>
+      <PatchedDelay delay_msec="240">
+        <Talker message="H done"/>
+      </PatchedDelay>
+
+      <!-- S -->
+      <Talker message="Drawing S"/>
+      <SetPenTurtle service_name="/turtle2/set_pen" r="40" g="220" b="90" width="3" off="1"/>
+      <MoveTurtleAbsolute service_name="/turtle2/teleport_absolute" x="5.2" y="8.8" theta="0.0"/>
+      <SetPenTurtle service_name="/turtle2/set_pen" r="40" g="220" b="90" width="3" off="0"/>
+      <PatchedDelay delay_msec="170">
+        <MoveTurtleAbsolute service_name="/turtle2/teleport_absolute" x="4.3" y="8.8" theta="0.0"/>
+      </PatchedDelay>
+      <PatchedDelay delay_msec="170">
+        <MoveTurtleAbsolute service_name="/turtle2/teleport_absolute" x="3.7" y="8.2" theta="0.0"/>
+      </PatchedDelay>
+      <PatchedDelay delay_msec="170">
+        <MoveTurtleAbsolute service_name="/turtle2/teleport_absolute" x="3.7" y="7.4" theta="0.0"/>
+      </PatchedDelay>
+      <PatchedDelay delay_msec="170">
+        <MoveTurtleAbsolute service_name="/turtle2/teleport_absolute" x="4.3" y="6.8" theta="0.0"/>
+      </PatchedDelay>
+      <PatchedDelay delay_msec="170">
+        <MoveTurtleAbsolute service_name="/turtle2/teleport_absolute" x="5.0" y="6.3" theta="0.0"/>
+      </PatchedDelay>
+      <PatchedDelay delay_msec="170">
+        <MoveTurtleAbsolute service_name="/turtle2/teleport_absolute" x="5.4" y="5.6" theta="0.0"/>
+      </PatchedDelay>
+      <PatchedDelay delay_msec="170">
+        <MoveTurtleAbsolute service_name="/turtle2/teleport_absolute" x="5.4" y="4.8" theta="0.0"/>
+      </PatchedDelay>
+      <PatchedDelay delay_msec="170">
+        <MoveTurtleAbsolute service_name="/turtle2/teleport_absolute" x="5.0" y="4.1" theta="0.0"/>
+      </PatchedDelay>
+      <PatchedDelay delay_msec="170">
+        <MoveTurtleAbsolute service_name="/turtle2/teleport_absolute" x="4.3" y="3.6" theta="0.0"/>
+      </PatchedDelay>
+      <PatchedDelay delay_msec="170">
+        <MoveTurtleAbsolute service_name="/turtle2/teleport_absolute" x="3.7" y="3.0" theta="0.0"/>
+      </PatchedDelay>
+      <PatchedDelay delay_msec="170">
+        <MoveTurtleAbsolute service_name="/turtle2/teleport_absolute" x="3.7" y="2.4" theta="0.0"/>
+      </PatchedDelay>
+      <PatchedDelay delay_msec="170">
+        <MoveTurtleAbsolute service_name="/turtle2/teleport_absolute" x="4.6" y="2.4" theta="0.0"/>
+      </PatchedDelay>
+      <PatchedDelay delay_msec="170">
+        <MoveTurtleAbsolute service_name="/turtle2/teleport_absolute" x="5.2" y="2.4" theta="0.0"/>
+      </PatchedDelay>
+      <PatchedDelay delay_msec="240">
+        <Talker message="S done"/>
+      </PatchedDelay>
+
+      <!-- L -->
+      <Talker message="Drawing L"/>
+      <SetPenTurtle service_name="/turtle3/set_pen" r="255" g="205" b="20" width="3" off="1"/>
+      <MoveTurtleAbsolute service_name="/turtle3/teleport_absolute" x="6.2" y="8.8" theta="0.0"/>
+      <SetPenTurtle service_name="/turtle3/set_pen" r="255" g="205" b="20" width="3" off="0"/>
+      <PatchedDelay delay_msec="170">
+        <MoveTurtleAbsolute service_name="/turtle3/teleport_absolute" x="6.2" y="2.4" theta="0.0"/>
+      </PatchedDelay>
+      <PatchedDelay delay_msec="170">
+        <MoveTurtleAbsolute service_name="/turtle3/teleport_absolute" x="7.8" y="2.4" theta="0.0"/>
+      </PatchedDelay>
+      <PatchedDelay delay_msec="240">
+        <Talker message="L done"/>
+      </PatchedDelay>
+
+      <!-- U -->
+      <Talker message="Drawing U"/>
+      <SetPenTurtle service_name="/turtle4/set_pen" r="70" g="190" b="255" width="3" off="1"/>
+      <MoveTurtleAbsolute service_name="/turtle4/teleport_absolute" x="8.7" y="8.8" theta="0.0"/>
+      <SetPenTurtle service_name="/turtle4/set_pen" r="70" g="190" b="255" width="3" off="0"/>
+      <PatchedDelay delay_msec="170">
+        <MoveTurtleAbsolute service_name="/turtle4/teleport_absolute" x="8.7" y="2.4" theta="0.0"/>
+      </PatchedDelay>
+      <PatchedDelay delay_msec="170">
+        <MoveTurtleAbsolute service_name="/turtle4/teleport_absolute" x="10.0" y="2.4" theta="0.0"/>
+      </PatchedDelay>
+      <PatchedDelay delay_msec="170">
+        <MoveTurtleAbsolute service_name="/turtle4/teleport_absolute" x="10.0" y="8.8" theta="0.0"/>
+      </PatchedDelay>
+      <SetPenTurtle service_name="/turtle4/set_pen" r="70" g="190" b="255" width="3" off="1"/>
+
+      <Talker message="Finished HSLU drawing"/>
+    </Sequence>
+  </BehaviorTree>
+</root>

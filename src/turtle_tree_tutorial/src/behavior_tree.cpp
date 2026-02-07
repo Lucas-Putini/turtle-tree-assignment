@@ -47,6 +47,10 @@ int main(int argc, char** argv) {
   factory.registerNodeType<ResetTurtle>("ResetTurtle", params);
 
   // the default name of the service can be overridden with the "service_name" input port to target a different turtle
+  params.default_port_value = "/turtle1/set_pen";
+  factory.registerNodeType<SetPenTurtle>("SetPenTurtle", params);
+
+  // the default name of the service can be overridden with the "service_name" input port to target a different turtle
   params.default_port_value = "/turtle1/teleport_relative";
   factory.registerNodeType<MoveTurtleRelative>("MoveTurtleRelative", params);
 

@@ -7,24 +7,19 @@
     },
     "containerEnv": {
         // display setting on Linux (default)
-        "DISPLAY": "${env:DISPLAY}",
+        // "DISPLAY": "${env:DISPLAY}",
         // display setting with X11 forwarding
-        // "DISPLAY": "host.docker.internal:0",
+        "DISPLAY": "host.docker.internal:0",
         "ROS_AUTOMATIC_DISCOVERY_RANGE": "LOCALHOST",
         "ROS_DOMAIN_ID": "42"
     },
-    "runArgs": [
-        "--net=host",
-        "--pid=host",
-        "--ipc=host"
-    ],
-    "initializeCommand": "xhost +localhost",
+    "runArgs": [],
+    "initializeCommand": "xhost +",
     "onCreateCommand": "mkdir -p /home/ros2/.devcontainer",
     "workspaceFolder": "/home/ros2/.devcontainer",
     "workspaceMount": "source=${localWorkspaceFolder},target=/home/ros2/.devcontainer,type=bind,consistency=cached",
     "mounts": [
-        "source=${localWorkspaceFolder}/src,target=/home/ros2/ws/src/ros_tutorial/src,type=bind,consistency=cached",
-        "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind,consistency=cached"
+        "source=${localWorkspaceFolder}/src,target=/home/ros2/ws/src/ros_tutorial/src,type=bind,consistency=cached"
     ],
     "postCreateCommand": "sudo chown -R ros2:ros2 /home/ros2/ws",
     "customizations": {
@@ -36,5 +31,5 @@
                 "spencerwmiles.vscode-task-buttons"
             ]
         }
-    },
+    }
 }

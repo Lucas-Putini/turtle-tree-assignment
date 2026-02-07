@@ -16,7 +16,7 @@
         {
             "task": "run behavior tree",
             "label": "Run behavior tree",
-            "tooltip": "Run the behavior tree",
+            "tooltip": "Run the HSLU behavior tree",
             "color": "warning"
         }
     ]

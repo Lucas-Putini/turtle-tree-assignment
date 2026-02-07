@@ -6,12 +6,24 @@
         {
             "label": "run turtlesim",
             "type": "shell",
-            "command": "ros2 run turtlesim turtlesim_node"
+            "command": "ros2 run turtlesim turtlesim_node",
+            "options": {
+                "env": {
+                    "QT_X11_NO_MITSHM": "1",
+                    "LIBGL_ALWAYS_SOFTWARE": "1",
+                    "LIBGL_ALWAYS_INDIRECT": "1"
+                }
+            }
         },
         {
             "label": "run behavior tree",
             "type": "shell",
-            "command": "source /home/ros2/ws/install/setup.bash && ros2 run turtle_tree_tutorial behavior_tree"
+            "command": "source /home/ros2/ws/install/setup.bash && ros2 run turtle_tree_tutorial behavior_tree hslu.xml"
+        },
+        {
+            "label": "run behavior tree (example)",
+            "type": "shell",
+            "command": "source /home/ros2/ws/install/setup.bash && ros2 run turtle_tree_tutorial behavior_tree example.xml"
         },
         {
             "label": "colcon build",

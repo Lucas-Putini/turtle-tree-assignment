@@ -4,6 +4,7 @@
 #include <geometry_msgs/msg/twist.hpp>
 #include <std_srvs/srv/empty.hpp>
 #include <turtlesim/msg/pose.hpp>
+#include <turtlesim/srv/set_pen.hpp>
 #include <turtlesim/srv/spawn.hpp>
 #include <turtlesim/srv/teleport_absolute.hpp>
 #include <turtlesim/srv/teleport_relative.hpp>
@@ -19,6 +20,51 @@ public:
       : BT::RosServiceNode<std_srvs::srv::Empty>(name, conf, params) {}
 
   bool setRequest(Request::SharedPtr&) override { return true; }
+
+  BT::NodeStatus onResponseReceived(const Response::SharedPtr&) override { return BT::NodeStatus::SUCCESS; }
+};
+
+/**
+ * BehaviorTree Action Node that calls the "set_pen" service to configure a turtle trail.
+ *
+ * Input ports:
+ *   - r, g, b: pen color channels (0-255)
+ *   - width: pen stroke width (0-255)
+ *   - off: 0 to draw, 1 to disable drawing while moving
+ *
+ *   - service_name: if specified, can be used to target a different turtle set_pen service
+ */
+class SetPenTurtle : public BT::RosServiceNode<turtlesim::srv::SetPen> {
+public:
+  SetPenTurtle(const std::string& name, const BT::NodeConfig& conf, const BT::RosNodeParams& params)
+      : BT::RosServiceNode<turtlesim::srv::SetPen>(name, conf, params) {}
+
+  static BT::PortsList providedPorts() {
+    return providedBasicPorts(
+        {BT::InputPort<int>("r"), BT::InputPort<int>("g"), BT::InputPort<int>("b"),
+         BT::InputPort<int>("width"), BT::InputPort<int>("off")});
+  }
+
+  bool setRequest(Request::SharedPtr& request) override {
+    int red = 255;
+    int green = 255;
+    int blue = 255;
+    int width = 3;
+    int off = 0;
+
+    getInput("r", red);
+    getInput("g", green);
+    getInput("b", blue);
+    getInput("width", width);
+    getInput("off", off);
+
+    request->r = static_cast<uint8_t>(red);
+    request->g = static_cast<uint8_t>(green);
+    request->b = static_cast<uint8_t>(blue);
+    request->width = static_cast<uint8_t>(width);
+    request->off = static_cast<uint8_t>(off);
+    return true;
+  }
 
   BT::NodeStatus onResponseReceived(const Response::SharedPtr&) override { return BT::NodeStatus::SUCCESS; }
 };
