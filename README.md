@@ -205,25 +205,39 @@ All AI suggestions were manually reviewed, edited, and validated through executi
 - `run turtlesim`
 - `run behavior tree`
 
-## Requirement 3 Evidence: Generative AI Prompt Log
+## Generative AI Usage (Requirement)
 
-During development, generative AI was used as an engineering assistant.
-Below are representative prompts (translated to English from the original Portuguese conversation) and how the outputs were applied.
+I used generative AI to create/refine the XML Behavior Tree (requirement option 1).
 
-| Goal | Example Prompt Used | Applied Result |
-|---|---|---|
-| Fix Mac GUI runtime | "Help me make turtlesim GUI work on macOS devcontainer with XQuartz and Docker." | Updated devcontainer display-related setup and validated turtlesim launch. |
-| Remove startup race errors | "Why do I get '/turtle2/... service not reachable' and how can I fix it cleanly?" | Split execution into `hslu_setup.xml` + `hslu_draw.xml`, then ran them sequentially in `.vscode/tasks.json`. |
-| Implement conditional logic | "Add SUCCESS/FAILURE logic per letter using Fallback + CheckTurtlePose." | Added TRY-A / TRY-B branches for H, S, L, U in `hslu_draw.xml`. |
-| Improve observability | "Add clear log messages so I can see which branch was executed." | Added explicit `Talker` logs for TRY-A and TRY-B paths in each letter block. |
-| Refine drawing quality | "Refine S-shape points so it looks more readable in turtlesim." | Iteratively adjusted `MoveTurtleAbsolute` points for the S trajectory. |
-| Prepare requirement explanation | "Explain simply what was implemented and how each requirement is satisfied." | Produced assignment-oriented README explanations for requirements 1, 2, and 3. |
+### Prompt used
+> Context: I am using BehaviorTree.CPP (`BTCPP_format="4"`) with ROS2/turtlesim.  
+> Available nodes and ports:  
+> - `Talker(message)`  
+> - `SetPenTurtle(service_name,r,g,b,width,off)`  
+> - `MoveTurtleAbsolute(service_name,x,y,theta)`  
+> - `CheckTurtlePose(topic_name,x,y,theta,linear_distance,angular_distance)`  
+> Task: Generate a full XML tree to draw “HSLU” with conditional logic using `Fallback`:  
+> - if turtle is already at start pose, do not teleport  
+> - otherwise teleport and validate again
 
-### Human Validation and Final Responsibility
+### Applied result
+The generated/refined structure was implemented in:  
+`src/turtle_tree_tutorial/behavior_trees/hslu_draw.xml`
+
+Example pattern used:
+```xml
+<Fallback>
+  <Sequence>
+    <CheckTurtlePose .../>
+  </Sequence>
+  <Sequence>
+    <MoveTurtleAbsolute .../>
+    <CheckTurtlePose .../>
+  </Sequence>
+</Fallback>
+```
 
 All AI suggestions were manually reviewed, edited, and validated by running:
 - `colcon build`
 - `run turtlesim`
 - `run behavior tree`
-
-Final implementation decisions and acceptance were made by the project author.
