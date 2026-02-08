@@ -114,9 +114,13 @@ This sample repository implements a few tree nodes to interact with the turtle v
 
 - ResetTurtle
 - SpawnTurtle
+- SetPenTurtle
 - CommandTurtleSwim
 - MoveTurtleRelative
 - MoveTurtleAbsolute
+- CheckTurtlePose
+- PatchedDelay
+- Talker (TalkerActionNode)
 
 See [turtle_interfaces.hpp](./src/turtle_tree_tutorial/include/turtle_tree_tutorial/turtle_interfaces.hpp)
 for more details on the behavior and input / output ports.
@@ -200,3 +204,26 @@ All AI suggestions were manually reviewed, edited, and validated through executi
 - `colcon build`
 - `run turtlesim`
 - `run behavior tree`
+
+## Requirement 3 Evidence: Generative AI Prompt Log
+
+During development, generative AI was used as an engineering assistant.
+Below are representative prompts (translated to English from the original Portuguese conversation) and how the outputs were applied.
+
+| Goal | Example Prompt Used | Applied Result |
+|---|---|---|
+| Fix Mac GUI runtime | "Help me make turtlesim GUI work on macOS devcontainer with XQuartz and Docker." | Updated devcontainer display-related setup and validated turtlesim launch. |
+| Remove startup race errors | "Why do I get '/turtle2/... service not reachable' and how can I fix it cleanly?" | Split execution into `hslu_setup.xml` + `hslu_draw.xml`, then ran them sequentially in `.vscode/tasks.json`. |
+| Implement conditional logic | "Add SUCCESS/FAILURE logic per letter using Fallback + CheckTurtlePose." | Added TRY-A / TRY-B branches for H, S, L, U in `hslu_draw.xml`. |
+| Improve observability | "Add clear log messages so I can see which branch was executed." | Added explicit `Talker` logs for TRY-A and TRY-B paths in each letter block. |
+| Refine drawing quality | "Refine S-shape points so it looks more readable in turtlesim." | Iteratively adjusted `MoveTurtleAbsolute` points for the S trajectory. |
+| Prepare requirement explanation | "Explain simply what was implemented and how each requirement is satisfied." | Produced assignment-oriented README explanations for requirements 1, 2, and 3. |
+
+### Human Validation and Final Responsibility
+
+All AI suggestions were manually reviewed, edited, and validated by running:
+- `colcon build`
+- `run turtlesim`
+- `run behavior tree`
+
+Final implementation decisions and acceptance were made by the project author.
